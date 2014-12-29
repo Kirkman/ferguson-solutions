@@ -96,7 +96,11 @@ DEBUG = True
 """
 COPY EDITING
 """
-COPY_GOOGLE_DOC_URL = 'https://docs.google.com/spreadsheet/ccc?key=0All2UKh5BEF6dGdEV3lTMzROYkNDREprSWZJNHdrb1E'
+
+
+
+#COPY_GOOGLE_DOC_URL = 'https://docs.google.com/spreadsheets/d/1A1aXUqMyXqQ9hcdLAE1WqBTkBLTAKA6ze4Ei-FQwlQ0/edit?usp=sharing'
+COPY_GOOGLE_DOC_URL = 'https://docs.google.com/spreadsheet/ccc?key=0All2UKh5BEF6dEQweldzaEQ3Ym9SdWlzSnRIbjJra2c#gid=11'
 COPY_PATH = 'data/copy.xlsx'
 
 """

@@ -1,91 +1,39 @@
-// Global jQuery references
-var $shareModal = null;
-var $commentCount = null;
-
-// Global state
-var firstShareLoad = true;
-
-/*
- * Run on page load.
- */
-var onDocumentLoad = function(e) {
-    // Cache jQuery references
-    $shareModal = $('#share-modal');
-    $commentCount = $('.comment-count');
-
-    // Bind events
-    $shareModal.on('shown.bs.modal', onShareModalShown);
-    $shareModal.on('hidden.bs.modal', onShareModalHidden);
-
-    // configure ZeroClipboard on share panel
-    ZeroClipboard.config({ swfPath: 'js/lib/ZeroClipboard.swf' });
-    var clippy = new ZeroClipboard($(".clippy"));
-
-    clippy.on('ready', function(readyEvent) {
-        clippy.on('aftercopy', onClippyCopy);
-    });
-
-    renderExampleTemplate();
-    getCommentCount(showCommentCount);
+function getQueryVariable(variable) {
+	var query = window.location.search.substring(1);
+	var vars = query.split("&");
+	for (var i=0;i<vars.length;i++) {
+		var pair = vars[i].split("=");
+		if(pair[0] == variable){return pair[1];}
+	}
+	return(false);
 }
 
-/*
- * Basic templating example.
- */
-var renderExampleTemplate = function() {
-    var context = $.extend(APP_CONFIG, {
-        'template_path': 'jst/example.html',
-        'config': JSON.stringify(APP_CONFIG, null, 4),
-        'copy': JSON.stringify(COPY, null, 4)
-    });
 
-    var html = JST.example(context);
+jQuery( document ).ready(function( $ ) {
+	$('#html h1').addClass('prettify');
 
-    $('#template-example').html(html);
-}
+	window.jsprettify.run();
 
-/*
- * Display the comment count.
- */
-var showCommentCount = function(count) {
-    $commentCount.text(count);
+	$('.topic h2').click( function(){
+		$(this).parent().toggleClass('active');
+		$theSwiper = $(this).parent().children('.swiper-container');
+		if ( $(this).parent().hasClass('active') ) {
+			var mySwiper = $theSwiper.swiper({
+				pagination: $theSwiper.find('.pagination')[0],
+				createPagination: true,
+				paginationClickable: true
+			});
+			$theSwiper.children('.arrow-left').click(function(e){ mySwiper.swipePrev() });
+			$theSwiper.children('.arrow-right').click(function(e){ mySwiper.swipeNext() });
+			// console.log( $theSwiper );
 
-    if (count > 0) {
-        $commentCount.addClass('has-comments');
-    }
-
-    if (count > 1) {
-        $commentCount.next('.comment-label').text('Comments');
-    }
-}
-
-/*
- * Share modal opened.
- */
-var onShareModalShown = function(e) {
-    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'open-share-discuss']);
-
-    if (firstShareLoad) {
-        loadComments();
-
-        firstShareLoad = false;
-    }
-}
-
-/*
- * Share modal closed.
- */
-var onShareModalHidden = function(e) {
-    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'close-share-discuss']);
-}
-
-/*
- * Text copied to clipboard.
- */
-var onClippyCopy = function(e) {
-    alert('Copied to your clipboard!');
-
-    _gaq.push(['_trackEvent', APP_CONFIG.PROJECT_SLUG, 'summary-copied']);
-}
-
-$(onDocumentLoad);
+		}
+		else {
+			console.log('INACTIVE!');
+			$theSwiper.swiper().destroy();
+			$theSwiper.children('.arrow-left').off();
+			$theSwiper.children('.arrow-right').off();
+			// console.log( $theSwiper );
+		}
+	});
+});
