@@ -42,9 +42,9 @@
 	}
 
 
-	.asset h1 {
-		font-family: 'PT Serif', Georgia, serif;
-		font-size: 4rem !important;
+	.asset h1, #interactive-wrapper h1 {
+		font-family: 'Montserrat', Georgia, serif;
+		font-size: 7rem !important;
 		text-align: center;
 	}
 
@@ -88,24 +88,20 @@
 
 	#interactive-wrapper .topic {
 		width: 100%;
-		height: 10vh;
 		position: relative;
 		margin: 0px;
 	}
 
-	#interactive-wrapper .topic.black {
+	#interactive-wrapper .topic.black h2, #interactive-wrapper .topic.black .swiper-container {
 		background-color: #171a1c;
 		color: #eee;
 	}
 
-	#interactive-wrapper .topic.white {
+	#interactive-wrapper .topic.white h2, #interactive-wrapper .topic.white .swiper-container {
 		background-color: #eee;
 		color: #171a1c;
 	}
 
-	#interactive-wrapper .topic.active {
-		height: 50vh;
-	}
 
 	#interactive-wrapper .topic .swiper-container, #interactive-wrapper .topic .pagination {
 		display: none;
@@ -118,24 +114,15 @@
 
 	#interactive-wrapper .topic h2 {
 		font-family: 'Montserrat', Georgia, serif;
-		font-size: 4.5rem;
-		height: 5rem;
+		font-size: 3.5rem;
+		line-height: 7.5rem;
+		height: 7.5rem;
 		margin: 0px;
 		padding: 0px;
-		top: 50%;
-		transform: translateY(-50%);
 		display: block;
 		width: 100%;
 		text-align: center;
 		position: relative;
-	}
-
-	#interactive-wrapper .topic.active h2 {
-		height: 9vh;
-		margin: 0px;
-		padding: 1vh 0px 0px 0px;
-		top: 0;
-		transform: none;
 	}
 
 
@@ -144,11 +131,18 @@
 		height: 41vh;
 	}
 
-
-
 	#interactive-wrapper .swiper-slide {
-		padding: 0px 6rem 5vh 6rem;
+		padding: 0px 6rem 0 6rem;
+		display: block;
 	}
+
+	#interactive-wrapper .swiper-content {
+		display: block;
+		position: relative;
+		top: 50%;
+		transform: translateY(-60%);
+	}
+
 
 	#interactive-wrapper .swiper-slide h3, 	#interactive-wrapper .swiper-slide p {
 		max-width: 900px;
@@ -169,9 +163,12 @@
 	#interactive-wrapper .pagination {
 		position: absolute;
 		z-index: 20;
-		left: 6rem;
 		bottom: 2vh;
-		margin: 0px;
+		left: 0;
+		right: 0;
+		width: 100%;
+		margin: 0px auto;
+		text-align: center;
 	}
 
 
@@ -234,34 +231,19 @@
 
 		#interactive-wrapper .swiper-container, #interactive-wrapper .swiper-slide {
 			width: 100%;
-			height: 81vh;
+			height: 61vh;
 		}
 
-		#interactive-wrapper .topic.active {
-			height: 90vh;
-		}
-
-
-		#interactive-wrapper .topic h2 {
-			font-family: 'PT Serif', Georgia, serif;
-			font-size: 3rem;
-			height: 3.5rem;
-			margin: 0px;
-			padding: 0px;
-			top: 50%;
-			transform: translateY(-50%);
+		#interactive-wrapper .swiper-content {
 			display: block;
-			width: 100%;
-			text-align: center;
 			position: relative;
+			top: 50%;
+			transform: translateY(-60%);
 		}
 
-		#interactive-wrapper .topic.active h2 {
-			height: 9vh;
-			margin: 0px;
-			padding: 1vh 0px 0px 0px;
-			top: 0;
-			transform: none;
+
+		#interactive-wrapper .swiper-slide h3, 	#interactive-wrapper .swiper-slide p {
+			font-size: 1.5rem;
 		}
 
 

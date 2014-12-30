@@ -9,8 +9,6 @@
 
 <h1>{{ COPY.content.project_name }}</h1>
 
-<p>{{ COPY.content.project_name }}</p>
-
 <p class="intro prettify">{{ COPY.content.intro }}</p>
 <p class="signature">&mdash; {{ COPY.content.byline }}</p>
 
@@ -20,14 +18,13 @@
 		<h2>{{topic.topic}}</h2>
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
-				{% for row in COPY.solutions %}
-				{% if row.topic == topic.slug %}
+				{% for row in COPY.solutions if row.topic == topic.slug %}
 				<div class="swiper-slide">
-					<!--<p class="quote"></p>-->
+					<div class="swiper-content">
 					<p class="idea">{{ row.solution }}</p>
 					<h3 class="name">{{ row.name }}, {{ row.age }}, {{ row.location }} </h3>
+					</div><!--swiper-content-->
 				</div> <!--swiper-slide-->
-				{% endif %}
 				{% endfor %}
 			</div> <!--swiper-wrapper-->
 			<div class="pagination"></div>

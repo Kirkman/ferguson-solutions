@@ -19,7 +19,6 @@
 	{% endblock extra_head %}
 </head>
 <body class="prettify">
-	<a class="sr-only" href="#content">Skip To Content</a>
 
 	{% block outer_content %}
 	<!-- this is where nav code would go -->
@@ -47,6 +46,7 @@
 	{{ JS.push('js/lib/bootstrap.js') }}
 	{{ JS.push('js/lib/jsprettify-all-latest.js') }}
 	{{ JS.push('js/lib/swiper.js') }}
+	{{ JS.push('js/lib/jquery.scrollTo.min.js') }}
 
 	{{ JS.push('js/app.js') }}
 	{% block extra_foot_js %}{% endblock extra_foot_js %}
