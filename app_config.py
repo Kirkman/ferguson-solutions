@@ -123,7 +123,7 @@ NPR_DFP = {
 SERVICES
 """
 GOOGLE_ANALYTICS = {
-    'ACCOUNT_ID': 'UA-5828686-4',
+    'ACCOUNT_ID': 'UA-54716522-2',
     'DOMAIN': PRODUCTION_S3_BUCKET['bucket_name'],
     'TOPICS': '' # e.g. '[1014,3,1003,1002,1001]'
 }

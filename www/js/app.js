@@ -37,17 +37,36 @@ jQuery( document ).ready(function( $ ) {
 			}
 			// now activate this element
 			$(this).parent().addClass('active');
-			// create swiper object
-			var mySwiper = $theSwiper.swiper({
-				pagination: $theSwiper.find('.pagination')[0],
-				createPagination: true,
-				paginationClickable: true
-			});
-			// add nav arrows
-			$theSwiper.children('.arrow-left').click(function(e){ mySwiper.swipePrev() });
-			$theSwiper.children('.arrow-right').click(function(e){ mySwiper.swipeNext() });
+
+			// If device supports touch, let's not use pagination
+			if (('ontouchstart' in window) || window.documentTouch && document instanceof documentTouch) {
+				// create swiper object
+				var mySwiper = $theSwiper.swiper({
+					paginationClickable: false
+				});
+				$theSwiper.children('.pagination').append('<p>Swipe to see more solutions.</p>');
+				$theSwiper.children('.arrow-left').remove();
+				$theSwiper.children('.arrow-right').remove();
+			}
+			// If device doesn't support touch, let's use pagination
+			else {
+				// create swiper object
+				var mySwiper = $theSwiper.swiper({
+					pagination: $theSwiper.find('.pagination')[0],
+					createPagination: true,
+					simulateTouch: false,
+					paginationClickable: true
+				});
+				// add nav arrows
+				$theSwiper.children('.arrow-left').click(function(e){ mySwiper.swipePrev() });
+				$theSwiper.children('.arrow-right').click(function(e){ mySwiper.swipeNext() });
+			}
+
+
 			// scroll to the element we just clicked, in case we got knocked out of whack		
 			$( document ).scrollTo( $(this), 800 );
 		}
 	});
 });
+
+
