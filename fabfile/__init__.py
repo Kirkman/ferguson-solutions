@@ -100,45 +100,15 @@ Changes to deployment requires a full-stack test. Deployment
 has two primary functions: Pushing flat files to S3 and deploying
 code to a remote server if required.
 """
-def _deploy_to_s3(path='.gzip'):
-    """
-    Deploy project files to S3.
-    """
-    # Clear files that should never be deployed
-    local('rm -rf %s/live-data' % path)
-    local('rm -rf %s/sitemap.xml' % path)
-
-    exclude_flags = ''
-    include_flags = ''
-
-    with open('gzip_types.txt') as f:
-        for line in f:
-            exclude_flags += '--exclude "%s" ' % line.strip()
-            include_flags += '--include "%s" ' % line.strip()
-
-    exclude_flags += '--exclude "www/assets" '
-    
-    sync = ('aws s3 sync %s/ %s/ --acl "public-read" ' + exclude_flags + ' --cache-control "max-age=%i" --region "%s"') % (
-        path,
-        app_config.S3_DEPLOY_URL,
-        app_config.DEFAULT_MAX_AGE,
-        app_config.S3_BUCKET['region']
-    )
-
-    sync_gzip = ('aws s3 sync %s/ %s/ --acl "public-read" --content-encoding "gzip" --exclude "*" ' + include_flags + ' --cache-control "max-age=%i" --region "%s"') % (
-        path,
-        app_config.S3_DEPLOY_URL,
-        app_config.DEFAULT_MAX_AGE,
-        app_config.S3_BUCKET['region']
-    )
-
-    local(sync)
-    local(sync_gzip)
 
 def _deploy_to_graphics():
-    print app_config.S3_DEPLOY_URL
-    if not os.path.exists(app_config.S3_DEPLOY_URL):
-        os.makedirs(app_config.S3_DEPLOY_URL)
+    mkdir = ('ssh %s@%s mkdir -p %s ') % (
+        app_config.S3_USER,
+        app_config.S3_BUCKET['bucket_name'],
+        app_config.S3_DEPLOY_URL
+    )
+    local(mkdir)
+
     sync = ('rsync -a www/ %s ') % (
         app_config.S3_DEPLOY_URL
     )
