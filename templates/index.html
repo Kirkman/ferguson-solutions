@@ -28,7 +28,7 @@
 				{% for row in COPY.solutions if row.topic == topic.slug %}
 				<div class="swiper-slide">
 					<div class="swiper-content">
-					<p class="{% if row.long %}idea kern{% else %}idea{% endif %}">{{ row.solution }}</p>
+					<p class="{% if row.long %}idea long{% elif row.short %}idea short{% else %}idea{% endif %}">{{ row.solution }}</p>
 					<h3 class="name">{{ row.name }}, {{ row.age }}, {{ row.location }} </h3>
 					</div><!--swiper-content-->
 				</div> <!--swiper-slide-->
@@ -40,7 +40,6 @@
 		</div><!--swiper-container-->
 	</div><!--topic-->
 	{% endfor %}
-
 
 </div><!--interactive-wrapper-->
 
